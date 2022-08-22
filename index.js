@@ -18,12 +18,15 @@ class Queue {
     }
 
     pop() {
+        document.getElementById(`${this.data[0]}`).remove();
+
         const aux = this.data[0];
         this.data[0] = null;
         this.data.forEach((el, index) => {
             this.data[index - 1] = el;
             this.data[index] = null
         });
+        this.lastItem--;
 
         return aux;
     }
@@ -32,7 +35,8 @@ class Queue {
         const container = document.createElement('DIV');
         container.classList.add('item');
         container.innerHTML = this.data[this.lastItem];
-        document.querySelector('.main-container').appendChild(container);
+        container.id = this.data[this.lastItem];
+        document.querySelector('.item-container').appendChild(container);
     }
 }
 
@@ -62,3 +66,14 @@ class Stack {
         return aux;
     }
 }
+
+const queue = new Queue(100);
+
+document.querySelector('.push-button').addEventListener('click', () => {
+    queue.push(document.querySelector('.insert').value);
+    document.querySelector('.insert').value = '';
+});
+
+document.querySelector('.pop-button').addEventListener('click', () => {
+    queue.pop();
+});
