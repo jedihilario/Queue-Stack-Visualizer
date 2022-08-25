@@ -22,7 +22,7 @@
 }
 
 .buttons {
-    padding: 8px;
+    padding: 16px;
 }
 
 .buttons button {
@@ -39,6 +39,10 @@
     border-radius: 8px;
     width: 172px;
     padding: 8px;
+}
+
+.mode {
+    background-color: #f5f5f5;
 }
 
 .item {
