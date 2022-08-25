@@ -84,14 +84,16 @@ class Stack {
 
 function changeData(queue, stack, direction) {
     if(direction === 'toStack') {
-        for(let i = 0; i < queue.lastItem; i++) stack.push(queue.pop());
+        const length = queue.lastItem;
+        for(let i = 0; i < length; i++) stack.push(queue.pop());
         return 0;
     }
 
     if(direction == 'toQueue') {
-        const arrAux = new Array(stack.lastItem);
-        for(let i = 0; i < stack.lastItem; i++) arrAux[i] = stack.pop();
-        for(let i = 0; i < arrAux.length; i++) queue.push(arrAux.length - i);
+        const length = stack.lastItem;
+        const arrAux = new Array(length);
+        for(let i = 0; i < length; i++) arrAux[i] = stack.pop();
+        for(let i = 0; i < length; i++) queue.push(arrAux[(length - 1) - i]);
         return 0;
     }
 
