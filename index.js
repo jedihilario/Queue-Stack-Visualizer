@@ -12,7 +12,8 @@ class Queue {
     get top() { return this.data[0] }
 
     push(x) {
-        if(this.full) return new Error('Queue full!');
+        if(!x) throw new Error('Input camp required!');
+        if(this.full) throw new Error('Queue full!');
 
         this.data[this.lastItem] = x;
         this.renderElement();
@@ -20,6 +21,8 @@ class Queue {
     }
 
     pop() {
+        if(this.empty) throw new Error('Queue empty!');
+
         document.getElementById(`${this.data[0]}`).remove();
 
         const aux = this.data[0];
@@ -38,6 +41,7 @@ class Queue {
         container.classList.add('item');
         container.innerHTML = this.data[this.lastItem];
         container.id = this.data[this.lastItem];
+        container.style.animation = '1s appear ease-in';
         document.querySelector('.item-container').appendChild(container);
     }
 }
@@ -56,7 +60,8 @@ class Stack {
     get top() { return this.data[this.lastItem - 1] }
 
     push(x) {
-        if(this.full) return new Error('Stack full!');
+        if(!x) throw new Error('Input camp required!');
+        if(this.full) throw new Error('Stack full!');
 
         this.data[this.lastItem] = x;
         this.renderElement();
@@ -64,6 +69,8 @@ class Stack {
     }
 
     pop() {
+        if(this.empty) throw new Error('Stack empty!');
+
         document.getElementById(`${this.data[this.lastItem - 1]}`).remove();
 
         const aux = this.data[this.lastItem - 1];
@@ -78,6 +85,7 @@ class Stack {
         container.classList.add('item');
         container.innerHTML = this.data[this.lastItem];
         container.id = this.data[this.lastItem];
+        container.style.animation = '1s appear ease-in';
         document.querySelector('.item-container').appendChild(container);
     }
 }
@@ -121,10 +129,12 @@ document.querySelector('.mode-changer').addEventListener('click', () => {
     if(target === queue) {
         modeSign.innerHTML = 'Stack';
         changeData(queue, stack, 'toStack');
+        document.querySelector('.item-container').style.flexDirection = 'column-reverse';
         target = stack;
     } else if(target == stack) {
         modeSign.innerHTML = 'Queue';
         changeData(queue, stack, 'toQueue');
+        document.querySelector('.item-container').style.flexDirection = 'row';
         target = queue;
     }
 });
